@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ILGPU.SharpDX</id>
+    <version>0.1.0</version>
+    <title>ILGPU SharpDX Lib</title>
+    <owners>Marcel Koester</owners>
+    <authors>Marcel Koester</authors>
+    <licenseUrl>http://www.ilgpu.net/licenses/ILGPU.SharpDX.License.txt</licenseUrl>
+    <projectUrl>http://www.ilgpu.net/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>ILGPU SharpDX library.</description>
+    <summary>ILGPU wrappers and interop functions for SharpDX.</summary>
+    <releaseNotes>First public release version.</releaseNotes>
+    <copyright>Copyright © 2016-2017 Marcel Koester. All rights reserved.</copyright>
+    <tags>ilgpu gpu llvm nvidia amd amp opencl cuda directx sharpdx</tags>
+    <dependencies>
+      <dependency id="ILGPU" version="0.1.0" />
+      <dependency id="SharpDX" version="3.1.1" />
+      <dependency id="SharpDX.Direct3D11" version="3.1.1" />
+      <dependency id="SharpDX.DXGI" version="3.1.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\LICENSE.txt" target="" />
+    <file src="..\LICENSE-3RD-PARTY.txt" target="" />
+
+    <file src="..\Bin\Release\ILGPU.SharpDX.dll" target="lib\net46\ILGPU.SharpDX.dll" />
+    <file src="..\Bin\Release\ILGPU.SharpDX.xml" target="lib\net46\ILGPU.SharpDX.xml" />
+  </files>
+</package>

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILGPU.SharpDX", "ILGPU.SharpDX\ILGPU.SharpDX.csproj", "{16F8A585-71DE-441E-82EF-E6154CF94963}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{3608CCA8-EC47-4AC0-B7A1-A8AD3B968455}"
+	ProjectSection(SolutionItems) = preProject
+		..\.nuget\ILGPU.SharpDX.nuspec = ..\.nuget\ILGPU.SharpDX.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Debug|x64.Build.0 = Debug|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Debug|x86.Build.0 = Debug|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Release|x64.ActiveCfg = Release|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Release|x64.Build.0 = Release|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Release|x86.ActiveCfg = Release|Any CPU
+		{16F8A585-71DE-441E-82EF-E6154CF94963}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
