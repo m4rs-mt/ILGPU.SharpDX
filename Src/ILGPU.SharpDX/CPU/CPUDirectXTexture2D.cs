@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------------
 //                               ILGPU.SharpDX
-//                     Copyright (c) 2016-2017 Marcel Koester
+//                     Copyright (c) 2016-2018 Marcel Koester
 //                                www.ilgpu.net
 //
 // File: CPUDirectXTexture2D.cs
@@ -110,11 +110,11 @@ namespace ILGPU.SharpDX.CPU
                 // Copy the contents of the staging texture into the CPU-memory buffer
                 System.Buffer.MemoryCopy(
                     box.DataPointer.ToPointer(),
-                    cpuMemory.Pointer.ToPointer(),
+                    cpuMemory.NativePtr.ToPointer(),
                     lengthInBytes,
                     lengthInBytes);
             }
-            return cpuMemory.Pointer;
+            return cpuMemory.NativePtr;
         }
 
         /// <summary cref="DirectXBuffer.OnUnmap(DeviceContext)"/>
@@ -125,14 +125,14 @@ namespace ILGPU.SharpDX.CPU
                 // We have to copy the contents of the CPU-memory buffer into the DX buffer
                 Debug.Assert(!box.IsEmpty);
                 System.Buffer.MemoryCopy(
-                    cpuMemory.Pointer.ToPointer(),
+                    cpuMemory.NativePtr.ToPointer(),
                     box.DataPointer.ToPointer(),
                     cpuMemory.LengthInBytes,
                     cpuMemory.LengthInBytes);
             }
 
             context.UnmapSubresource(stagingTexture, 0);
-            box = default(DataBox);
+            box = default;
 
             if (ViewFlags != DirectXViewFlags.ReadOnly)
                 context.CopyResource(stagingTexture, Texture);
@@ -147,14 +147,8 @@ namespace ILGPU.SharpDX.CPU
         {
             base.Dispose(disposing);
 
-            if (stagingTexture == null)
-                return;
-
-            stagingTexture.Dispose();
-            stagingTexture = null;
-
-            cpuMemory?.Dispose();
-            cpuMemory = null;
+            Dispose(ref stagingTexture);
+            Dispose(ref cpuMemory);
         }
 
         #endregion

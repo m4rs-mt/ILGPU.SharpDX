@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------------
 //                               ILGPU.SharpDX
-//                     Copyright (c) 2016-2017 Marcel Koester
+//                     Copyright (c) 2016-2018 Marcel Koester
 //                                www.ilgpu.net
 //
 // File: CPUDirectXBuffer.cs
@@ -91,11 +91,11 @@ namespace ILGPU.SharpDX.CPU
             {
                 System.Buffer.MemoryCopy(
                     box.DataPointer.ToPointer(),
-                    cpuMemory.Pointer.ToPointer(),
+                    cpuMemory.NativePtr.ToPointer(),
                     cpuMemory.LengthInBytes,
                     cpuMemory.LengthInBytes);
             }
-            return cpuMemory.Pointer;
+            return cpuMemory.NativePtr;
         }
 
         /// <summary cref="DirectXBuffer.OnUnmap(DeviceContext)"/>
@@ -106,14 +106,14 @@ namespace ILGPU.SharpDX.CPU
                 // We have to copy the contents of the CPU-memory buffer into the DX buffer
                 Debug.Assert(!box.IsEmpty);
                 System.Buffer.MemoryCopy(
-                    cpuMemory.Pointer.ToPointer(),
+                    cpuMemory.NativePtr.ToPointer(),
                     box.DataPointer.ToPointer(),
                     cpuMemory.LengthInBytes,
                     cpuMemory.LengthInBytes);
             }
 
             context.UnmapSubresource(stagingBuffer, 0);
-            box = default(DataBox);
+            box = default;
 
             if (ViewFlags != DirectXViewFlags.ReadOnly)
                 context.CopyResource(stagingBuffer, Buffer);
@@ -128,14 +128,8 @@ namespace ILGPU.SharpDX.CPU
         {
             base.Dispose(disposing);
 
-            if (stagingBuffer == null)
-                return;
-
-            stagingBuffer.Dispose();
-            stagingBuffer = null;
-
-            cpuMemory.Dispose();
-            cpuMemory = null;
+            Dispose(ref stagingBuffer);
+            Dispose(ref cpuMemory);
         }
 
         #endregion

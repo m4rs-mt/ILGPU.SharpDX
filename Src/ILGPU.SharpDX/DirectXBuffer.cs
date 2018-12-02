@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------------
 //                               ILGPU.SharpDX
-//                     Copyright (c) 2016-2017 Marcel Koester
+//                     Copyright (c) 2016-2018 Marcel Koester
 //                                www.ilgpu.net
 //
 // File: DirectXBuffer.cs
@@ -18,17 +18,16 @@ using System;
 using Device = SharpDX.Direct3D11.Device;
 using Buffer = SharpDX.Direct3D11.Buffer;
 using Resource = SharpDX.Direct3D11.Resource;
+using System.Diagnostics;
 
 namespace ILGPU.SharpDX
 {
     /// <summary>
     /// Represents an abstract interop buffer for DX interop.
     /// </summary>
-    public abstract class DirectXBuffer: DisposeBase, IMemoryBuffer
+    public abstract class DirectXBuffer: ArrayViewSource, IMemoryBuffer
     {
         #region Instance
-
-        private IntPtr ptr = IntPtr.Zero;
 
         /// <summary>
         /// Constructs a new buffer for DX interop.
@@ -44,10 +43,10 @@ namespace ILGPU.SharpDX
             int numElements,
             DirectXBufferFlags bufferFlags,
             DirectXViewFlags viewFlags)
+            : base(accelerator)
         {
             if (numElements < 1)
                 throw new ArgumentOutOfRangeException(nameof(numElements));
-            Accelerator = accelerator;
             D3DDevice = d3dDevice;
             Length = numElements;
             BufferFlags = bufferFlags;
@@ -57,11 +56,6 @@ namespace ILGPU.SharpDX
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Returns the associated accelerator.
-        /// </summary>
-        public Accelerator Accelerator { get; }
 
         /// <summary>
         /// Returns the associated device.
@@ -96,25 +90,12 @@ namespace ILGPU.SharpDX
         /// <summary>
         /// Returns true iff the resource is currently mapped.
         /// </summary>
-        public bool IsMapped => ptr != IntPtr.Zero;
+        public bool IsMapped => NativePtr != IntPtr.Zero;
 
         /// <summary>
         /// Returns the number of elements.
         /// </summary>
         public int Length { get; }
-
-        /// <summary>
-        /// Returns the mapped pointer.
-        /// </summary>
-        public IntPtr Pointer
-        {
-            get
-            {
-                if (ptr == IntPtr.Zero)
-                    throw new InvalidOperationException("Cannot access an unmapped buffer");
-                return ptr;
-            }
-        }
 
         #endregion
 
@@ -125,9 +106,8 @@ namespace ILGPU.SharpDX
         /// </summary>
         internal void MapBuffer(DeviceContext context)
         {
-            if (ptr != IntPtr.Zero)
-                throw new InvalidOperationException("Buffer is already mapped");
-            ptr = OnMap(context);
+            Debug.Assert(!IsMapped, "Buffer is already mapped");
+            NativePtr = OnMap(context);
         }
 
         /// <summary>
@@ -142,14 +122,30 @@ namespace ILGPU.SharpDX
         /// </summary>
         internal void UnmapBuffer(DeviceContext context)
         {
+            Debug.Assert(IsMapped, "Buffer is not mapped");
             OnUnmap(context);
-            ptr = IntPtr.Zero;
+            NativePtr = IntPtr.Zero;
         }
 
         /// <summary>
         /// Disposes a previously performed mapping.
         /// </summary>
         protected abstract void OnUnmap(DeviceContext context);
+
+        /// <summary cref="ArrayViewSource.GetAsRawArray(AcceleratorStream, Index, Index)"/>
+        protected override ArraySegment<byte> GetAsRawArray(
+            AcceleratorStream stream,
+            Index byteOffset,
+            Index byteExtent) =>
+            throw new NotSupportedException();
+
+        /// <summary cref="IMemoryBuffer.GetAsRawArray(AcceleratorStream)"/>
+        public byte[] GetAsRawArray(AcceleratorStream stream) =>
+            throw new NotSupportedException();
+
+        /// <summary cref="IMemoryBuffer.MemSetToZero(AcceleratorStream)"/>
+        public void MemSetToZero(AcceleratorStream stream) =>
+            throw new NotSupportedException();
 
         #endregion
 
@@ -260,7 +256,7 @@ namespace ILGPU.SharpDX
         /// <summary>
         /// Returns an ILGPU view for accessing this buffer in a mapped context.
         /// </summary>
-        public ArrayView<T> View => new ArrayView<T>(Pointer, Length);
+        public ArrayView<T> View => new ArrayView<T>(this, 0, Length);
 
         #endregion
 

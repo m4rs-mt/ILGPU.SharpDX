@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------------
 //                               ILGPU.SharpDX
-//                     Copyright (c) 2016-2017 Marcel Koester
+//                     Copyright (c) 2016-2018 Marcel Koester
 //                                www.ilgpu.net
 //
 // File: CudaDirectXTexture2D.cs
@@ -103,7 +103,7 @@ namespace ILGPU.SharpDX.Cuda
                 // Copy texture data to buffer
                 var args = new CudaMemcpy2DArgs()
                 {
-                    dstDevice = buffer.Pointer,
+                    dstDevice = buffer.NativePtr,
                     dstMemoryType = CudaMemoryType.Device,
 
                     srcArray = cudaArray,
@@ -117,7 +117,7 @@ namespace ILGPU.SharpDX.Cuda
                     CudaNativeMethods.cuMemcpy2D(ref args));
             }
 
-            return buffer.Pointer;
+            return buffer.NativePtr;
         }
 
         /// <summary cref="DirectXBuffer.OnUnmap(DeviceContext)"/>
@@ -129,7 +129,7 @@ namespace ILGPU.SharpDX.Cuda
                 // Copy buffer data to texture
                 var args = new CudaMemcpy2DArgs()
                 {
-                    srcDevice = buffer.Pointer,
+                    srcDevice = buffer.NativePtr,
                     srcMemoryType = CudaMemoryType.Device,
 
                     dstArray = cudaArray,

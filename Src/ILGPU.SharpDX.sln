@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILGPU.SharpDX", "ILGPU.SharpDX\ILGPU.SharpDX.csproj", "{16F8A585-71DE-441E-82EF-E6154CF94963}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILGPU.SharpDX", "ILGPU.SharpDX\ILGPU.SharpDX.csproj", "{16F8A585-71DE-441E-82EF-E6154CF94963}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{3608CCA8-EC47-4AC0-B7A1-A8AD3B968455}"
 	ProjectSection(SolutionItems) = preProject
@@ -35,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {52C381F4-F02C-412B-BD4B-BEDBE65EF611}
 	EndGlobalSection
 EndGlobal

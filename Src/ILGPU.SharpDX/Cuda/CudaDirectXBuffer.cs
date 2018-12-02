@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------------
 //                               ILGPU.SharpDX
-//                     Copyright (c) 2016-2017 Marcel Koester
+//                     Copyright (c) 2016-2018 Marcel Koester
 //                                www.ilgpu.net
 //
 // File: CudaDirectXBuffer.cs
@@ -9,6 +9,7 @@
 // Illinois Open Source License. See LICENSE.txt for details.
 // -----------------------------------------------------------------------------
 
+using ILGPU.Runtime;
 using ILGPU.Runtime.Cuda;
 using SharpDX.Direct3D11;
 using System;

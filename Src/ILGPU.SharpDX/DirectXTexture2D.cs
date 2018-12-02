@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------------------------------------
 //                               ILGPU.SharpDX
-//                     Copyright (c) 2016-2017 Marcel Koester
+//                     Copyright (c) 2016-2018 Marcel Koester
 //                                www.ilgpu.net
 //
 // File: DirectXTexture2D.cs
@@ -118,10 +118,8 @@ namespace ILGPU.SharpDX
         /// <typeparam name="T">The element type.</typeparam>
         /// <returns>The created array view pointing to this texture.</returns>
         public ArrayView<T> GetLinearView<T>()
-            where T : struct
-        {
-            return new ArrayView<T>(Pointer, Length);
-        }
+            where T : struct =>
+            new ArrayView<T>(this, Index.Zero, Length);
 
         /// <summary>
         /// Returns an array view pointing to this texture.
@@ -129,10 +127,8 @@ namespace ILGPU.SharpDX
         /// <typeparam name="T">The element type.</typeparam>
         /// <returns>The created array view pointing to this texture.</returns>
         public ArrayView2D<T> GetView<T>()
-            where T : struct
-        {
-            return new ArrayView2D<T>(Pointer, Width, Height);
-        }
+            where T : struct =>
+            GetLinearView<T>().As2DView(Width, Height);
 
         #endregion
 
