@@ -6,15 +6,15 @@
     <title>ILGPU SharpDX Lib</title>
     <owners>Marcel Koester</owners>
     <authors>Marcel Koester</authors>
-    <licenseUrl>http://www.ilgpu.net/licenses/ILGPU.SharpDX.License.txt</licenseUrl>
+    <license type="file">LICENSE.txt</license>
     <projectUrl>http://www.ilgpu.net/</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>ILGPU SharpDX library.</description>
     <summary>ILGPU wrappers and interop functions for SharpDX.</summary>
-    <copyright>Copyright © 2016-2018 Marcel Koester. All rights reserved.</copyright>
+    <copyright>Copyright © 2016-2019 Marcel Koester. All rights reserved.</copyright>
     <tags>ilgpu gpu nvidia amd amp opencl cuda directx sharpdx</tags>
     <dependencies>
-      <dependency id="ILGPU" version="0.5" />
+      <dependency id="ILGPU" version="0.5.0" />
       <dependency id="SharpDX" version="4.2.0" />
       <dependency id="SharpDX.Direct3D11" version="4.2.0" />
       <dependency id="SharpDX.DXGI" version="4.2.0" />
@@ -24,10 +24,10 @@
     <file src="..\LICENSE.txt" target="" />
     <file src="..\LICENSE-3RD-PARTY.txt" target="" />
 
-    <file src="..\Bin\Release\net47\ILGPU.SharpDX.dll" target="lib\net47\Release\ILGPU.SharpDX.dll" />
-    <file src="..\Bin\Release\net47\ILGPU.SharpDX.xml" target="lib\net47\Release\ILGPU.SharpDX.xml" />
+    <file src="..\Bin\Release\net47\ILGPU.SharpDX.dll" target="lib\net47\ILGPU.SharpDX.dll" />
+    <file src="..\Bin\Release\net47\ILGPU.SharpDX.xml" target="lib\net47\ILGPU.SharpDX.xml" />
 
-    <file src="..\Bin\Release\netcoreapp2.0\ILGPU.SharpDX.dll" target="lib\netcoreapp2.0\Release\ILGPU.SharpDX.dll" />
-    <file src="..\Bin\Release\netcoreapp2.0\ILGPU.SharpDX.xml" target="lib\netcoreapp2.0\Release\ILGPU.SharpDX.xml" />
+    <file src="..\Bin\Release\netcoreapp2.0\ILGPU.SharpDX.dll" target="lib\netcoreapp2.0\ILGPU.SharpDX.dll" />
+    <file src="..\Bin\Release\netcoreapp2.0\ILGPU.SharpDX.xml" target="lib\netcoreapp2.0\ILGPU.SharpDX.xml" />
   </files>
 </package>
